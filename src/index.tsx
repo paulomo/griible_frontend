@@ -1,14 +1,26 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { store } from "./state/Dependencies";
+import { Provider } from "react-redux";
+import { QueryClient, QueryClientProvider } from "react-query";
+import { Root } from "./root/Root";
+import { ChakraProvider } from "@chakra-ui/react";
+
+const queryClient = new QueryClient();
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
+  <QueryClientProvider client={queryClient}>
+    <Provider store={store}>
+      <ChakraProvider>
+        <React.StrictMode>
+          <Root />
+        </React.StrictMode>
+      </ChakraProvider>
+    </Provider>
+  </QueryClientProvider>,
+  document.getElementById("root")
 );
 
 // If you want to start measuring performance in your app, pass a function
